@@ -9,6 +9,8 @@ import CreatePetPage from './pages/CreatePetPage'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
 import NotFoundPage from './pages/NotFoundPage'
+import PetDetailsPage from './pages/PetDetailsPage'
+
 
 function App() {
   return (
@@ -17,6 +19,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/pets" element={<PetsPage />} />
         <Route path="/pets/create" element={<CreatePetPage />} />
+        <Route path="/pets/:id" element={<PetDetailsPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
       </Route>

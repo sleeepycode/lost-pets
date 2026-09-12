@@ -8,6 +8,7 @@ import {
 } from '@mui/material'
 
 import type { Pet } from '../types/Pet'
+import { Link } from 'react-router-dom'
 
 interface PetCardProps {
   pet: Pet
@@ -60,8 +61,12 @@ function PetCard({ pet }: PetCardProps) {
       </CardContent>
 
       <CardActions>
-        <Button size="small">
-          Подробнее
+        <Button
+        size="small"
+        component={Link}
+        to={`/pets/${pet.id}`}
+        >
+        Подробнее
         </Button>
       </CardActions>
     </Card>
