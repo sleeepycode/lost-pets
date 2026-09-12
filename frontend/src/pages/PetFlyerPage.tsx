@@ -46,6 +46,11 @@ function PetFlyerPage() {
     <Container
       maxWidth="md"
       sx={{
+        px: {
+          xs: 2,
+          sm: 3,
+        },
+
         '@media print': {
           maxWidth: '100%',
           p: 0,
@@ -55,6 +60,7 @@ function PetFlyerPage() {
       <Box
         sx={{
           display: 'flex',
+          flexWrap: 'wrap',
           gap: 2,
           mb: 3,
 
@@ -85,10 +91,13 @@ function PetFlyerPage() {
         elevation={3}
         sx={{
           p: {
-            xs: 3,
+            xs: 2.5,
+            sm: 4,
             md: 6,
           },
+
           textAlign: 'center',
+          overflow: 'hidden',
 
           '@media print': {
             boxShadow: 'none',
@@ -97,34 +106,71 @@ function PetFlyerPage() {
         }}
       >
         <Typography
-          variant="h2"
           component="h1"
           sx={{
             fontWeight: 800,
             textTransform: 'uppercase',
-            mb: 2,
+            mb: {
+              xs: 2,
+              md: 3,
+            },
+
+            fontSize: {
+              xs: '2.5rem',
+              sm: '3.4rem',
+              md: '4rem',
+            },
+
+            lineHeight: 1.05,
+
+            overflowWrap: 'break-word',
+
+            '@media print': {
+              fontSize: '4rem',
+            },
           }}
         >
           {flyerTitle}
         </Typography>
 
-        <Divider sx={{ mb: 4 }} />
+        <Divider
+          sx={{
+            mb: {
+              xs: 3,
+              md: 4,
+            },
+          }}
+        />
 
         <Typography
-          variant="h3"
           component="h2"
           sx={{
             fontWeight: 700,
             mb: 1,
+
+            fontSize: {
+              xs: '2.25rem',
+              sm: '2.75rem',
+              md: '3rem',
+            },
           }}
         >
           {pet.name}
         </Typography>
 
         <Typography
-          variant="h5"
           color="text.secondary"
-          sx={{ mb: 4 }}
+          sx={{
+            mb: {
+              xs: 3,
+              md: 4,
+            },
+
+            fontSize: {
+              xs: '1.25rem',
+              md: '1.5rem',
+            },
+          }}
         >
           {pet.type}
         </Typography>
@@ -136,55 +182,113 @@ function PetFlyerPage() {
             mx: 'auto',
           }}
         >
-          <Typography variant="h6" sx={{ mb: 2 }}>
+          <Typography
+            sx={{
+              mb: 2,
+              fontSize: {
+                xs: '1rem',
+                sm: '1.15rem',
+                md: '1.25rem',
+              },
+              overflowWrap: 'break-word',
+            }}
+          >
             <strong>Место пропажи:</strong> {pet.location}
           </Typography>
 
-          <Typography variant="h6" sx={{ mb: 2 }}>
+          <Typography
+            sx={{
+              mb: 2,
+              fontSize: {
+                xs: '1rem',
+                sm: '1.15rem',
+                md: '1.25rem',
+              },
+            }}
+          >
             <strong>Дата пропажи:</strong> {pet.lostDate}
           </Typography>
 
-          <Typography variant="h6" sx={{ mb: 3 }}>
+          <Typography
+            sx={{
+              mb: 3,
+              fontSize: {
+                xs: '1rem',
+                sm: '1.15rem',
+                md: '1.25rem',
+              },
+              overflowWrap: 'break-word',
+            }}
+          >
             <strong>Контакт:</strong> {pet.contact}
           </Typography>
 
           <Divider sx={{ mb: 3 }} />
 
-          <Typography variant="h5" sx={{ mb: 1 }}>
+          <Typography
+            sx={{
+              mb: 1,
+              fontSize: {
+                xs: '1.3rem',
+                md: '1.5rem',
+              },
+            }}
+          >
             Приметы
           </Typography>
 
           <Typography
-            variant="body1"
             sx={{
-              fontSize: '1.15rem',
+              fontSize: {
+                xs: '1rem',
+                sm: '1.1rem',
+                md: '1.15rem',
+              },
               lineHeight: 1.7,
+              overflowWrap: 'break-word',
             }}
           >
             {pet.description}
           </Typography>
         </Box>
 
-        <Divider sx={{ my: 4 }} />
+        <Divider
+          sx={{
+            my: {
+              xs: 3,
+              md: 4,
+            },
+          }}
+        />
 
         {pet.status === 'SEARCHING' && (
           <Typography
-            variant="h5"
             sx={{
               fontWeight: 700,
+              lineHeight: 1.4,
+
+              fontSize: {
+                xs: '1.15rem',
+                sm: '1.3rem',
+                md: '1.5rem',
+              },
+
+              overflowWrap: 'break-word',
             }}
           >
-            Если вы видели этого питомца, пожалуйста, свяжитесь с владельцем:
-            {' '}
+            Если вы видели этого питомца, пожалуйста, свяжитесь с владельцем:{' '}
             {pet.contact}
           </Typography>
         )}
 
         {pet.status === 'FOUND' && (
           <Typography
-            variant="h5"
             sx={{
               fontWeight: 700,
+              fontSize: {
+                xs: '1.2rem',
+                md: '1.5rem',
+              },
             }}
           >
             Питомец уже найден.
@@ -193,9 +297,12 @@ function PetFlyerPage() {
 
         {pet.status === 'CLOSED' && (
           <Typography
-            variant="h5"
             sx={{
               fontWeight: 700,
+              fontSize: {
+                xs: '1.2rem',
+                md: '1.5rem',
+              },
             }}
           >
             Поиск по этому объявлению завершён.

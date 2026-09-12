@@ -4,8 +4,10 @@ import {
   Container,
   Typography,
 } from '@mui/material'
+
 import AddIcon from '@mui/icons-material/Add'
 import SearchIcon from '@mui/icons-material/Search'
+
 import { Link } from 'react-router-dom'
 
 import PetCard from '../components/PetCard'
@@ -20,28 +22,42 @@ function HomePage() {
         <Box
           sx={{
             py: {
-              xs: 5,
+              xs: 3,
+              sm: 5,
               md: 8,
             },
           }}
         >
           <Typography
-            variant="h2"
             component="h1"
             sx={{
               fontWeight: 700,
               mb: 2,
+              fontSize: {
+                xs: '2.5rem',
+                sm: '3.25rem',
+                md: '4rem',
+              },
+              lineHeight: {
+                xs: 1.1,
+                md: 1.15,
+              },
+              maxWidth: 1000,
             }}
           >
             Помогаем питомцам вернуться домой
           </Typography>
 
           <Typography
-            variant="h5"
             color="text.secondary"
             sx={{
               maxWidth: 750,
               mb: 4,
+              fontSize: {
+                xs: '1.1rem',
+                sm: '1.25rem',
+              },
+              lineHeight: 1.5,
             }}
           >
             Просматривайте объявления о потерянных питомцах,
@@ -51,7 +67,14 @@ function HomePage() {
           <Box
             sx={{
               display: 'flex',
-              flexWrap: 'wrap',
+              flexDirection: {
+                xs: 'column',
+                sm: 'row',
+              },
+              alignItems: {
+                xs: 'stretch',
+                sm: 'flex-start',
+              },
               gap: 2,
             }}
           >
@@ -61,6 +84,12 @@ function HomePage() {
               startIcon={<SearchIcon />}
               component={Link}
               to="/pets"
+              sx={{
+                width: {
+                  xs: '100%',
+                  sm: 'auto',
+                },
+              }}
             >
               Смотреть объявления
             </Button>
@@ -71,6 +100,12 @@ function HomePage() {
               startIcon={<AddIcon />}
               component={Link}
               to="/pets/create"
+              sx={{
+                width: {
+                  xs: '100%',
+                  sm: 'auto',
+                },
+              }}
             >
               Создать объявление
             </Button>
@@ -81,14 +116,23 @@ function HomePage() {
       <Box
         sx={{
           backgroundColor: '#ffffff',
-          py: 6,
+          py: {
+            xs: 4,
+            md: 6,
+          },
         }}
       >
         <Container maxWidth="lg">
           <Typography
-            variant="h4"
             component="h2"
-            sx={{ mb: 1 }}
+            sx={{
+              mb: 1,
+              fontSize: {
+                xs: '2rem',
+                md: '2.125rem',
+              },
+              lineHeight: 1.2,
+            }}
           >
             Актуальные объявления
           </Typography>
@@ -124,6 +168,12 @@ function HomePage() {
               component={Link}
               to="/pets"
               variant="outlined"
+              sx={{
+                width: {
+                  xs: '100%',
+                  sm: 'auto',
+                },
+              }}
             >
               Все объявления
             </Button>
