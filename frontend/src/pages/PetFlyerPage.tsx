@@ -35,6 +35,13 @@ function PetFlyerPage() {
     window.print()
   }
 
+  const flyerTitle =
+    pet.status === 'SEARCHING'
+      ? 'Пропал питомец'
+      : pet.status === 'FOUND'
+        ? 'Питомец найден'
+        : 'Объявление закрыто'
+
   return (
     <Container
       maxWidth="md"
@@ -98,7 +105,7 @@ function PetFlyerPage() {
             mb: 2,
           }}
         >
-          Пропал питомец
+          {flyerTitle}
         </Typography>
 
         <Divider sx={{ mb: 4 }} />
@@ -133,8 +140,12 @@ function PetFlyerPage() {
             <strong>Место пропажи:</strong> {pet.location}
           </Typography>
 
-          <Typography variant="h6" sx={{ mb: 3 }}>
+          <Typography variant="h6" sx={{ mb: 2 }}>
             <strong>Дата пропажи:</strong> {pet.lostDate}
+          </Typography>
+
+          <Typography variant="h6" sx={{ mb: 3 }}>
+            <strong>Контакт:</strong> {pet.contact}
           </Typography>
 
           <Divider sx={{ mb: 3 }} />
@@ -156,14 +167,40 @@ function PetFlyerPage() {
 
         <Divider sx={{ my: 4 }} />
 
-        <Typography
-          variant="h5"
-          sx={{
-            fontWeight: 700,
-          }}
-        >
-          Если вы видели этого питомца, пожалуйста, сообщите владельцу.
-        </Typography>
+        {pet.status === 'SEARCHING' && (
+          <Typography
+            variant="h5"
+            sx={{
+              fontWeight: 700,
+            }}
+          >
+            Если вы видели этого питомца, пожалуйста, свяжитесь с владельцем:
+            {' '}
+            {pet.contact}
+          </Typography>
+        )}
+
+        {pet.status === 'FOUND' && (
+          <Typography
+            variant="h5"
+            sx={{
+              fontWeight: 700,
+            }}
+          >
+            Питомец уже найден.
+          </Typography>
+        )}
+
+        {pet.status === 'CLOSED' && (
+          <Typography
+            variant="h5"
+            sx={{
+              fontWeight: 700,
+            }}
+          >
+            Поиск по этому объявлению завершён.
+          </Typography>
+        )}
       </Paper>
     </Container>
   )

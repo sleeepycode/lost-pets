@@ -117,6 +117,10 @@ function PetDetailsPage() {
         <strong>Дата пропажи:</strong> {pet.lostDate}
       </Typography>
 
+      <Typography sx={{ mb: 2 }}>
+        <strong>Контакт:</strong> {pet.contact}
+      </Typography>
+
       <Typography sx={{ mb: 4 }}>
         {pet.description}
       </Typography>

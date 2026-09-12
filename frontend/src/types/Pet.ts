@@ -7,5 +7,6 @@ export interface Pet {
   location: string
   lostDate: string
   description: string
+  contact: string
   status: PetStatus
 }
