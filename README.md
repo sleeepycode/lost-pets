@@ -367,7 +367,7 @@ npm run dev
 npm run build
 ```
 
-Проверка кода ESLint:
+Проверка кода:
 
 ```bash
 npm run lint
