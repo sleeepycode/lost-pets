@@ -1,15 +1,24 @@
+import { useState } from 'react'
+
 import {
+  Alert,
+  Box,
   Button,
   Chip,
   Container,
   Typography,
 } from '@mui/material'
+import ShareIcon from '@mui/icons-material/Share'
+import PrintIcon from '@mui/icons-material/Print'
 import { Link, useParams } from 'react-router-dom'
 
 import { pets } from '../data/pets'
 
 function PetDetailsPage() {
   const { id } = useParams()
+
+  const [shareMessage, setShareMessage] = useState('')
+  const [shareError, setShareError] = useState(false)
 
   const pet = pets.find((pet) => pet.id === Number(id))
 
@@ -41,8 +50,47 @@ function PetDetailsPage() {
         ? 'success'
         : 'default'
 
+  async function handleShare() {
+    const url = window.location.href
+
+    setShareMessage('')
+    setShareError(false)
+
+    try {
+      if (navigator.share) {
+        await navigator.share({
+          title: `Lost Pets — ${pet.name}`,
+          text: `Посмотрите объявление о питомце ${pet.name}`,
+          url,
+        })
+
+        setShareMessage('Объявлением успешно поделились.')
+      } else {
+        await navigator.clipboard.writeText(url)
+
+        setShareMessage('Ссылка на объявление скопирована.')
+      }
+    } catch (error) {
+      if (error instanceof DOMException && error.name === 'AbortError') {
+        return
+      }
+
+      setShareError(true)
+      setShareMessage('Не удалось поделиться объявлением.')
+    }
+  }
+
   return (
     <Container maxWidth="md">
+      {shareMessage && (
+        <Alert
+          severity={shareError ? 'error' : 'success'}
+          sx={{ mb: 3 }}
+        >
+          {shareMessage}
+        </Alert>
+      )}
+
       <Chip
         label={statusLabel}
         color={statusColor}
@@ -53,7 +101,11 @@ function PetDetailsPage() {
         {pet.name}
       </Typography>
 
-      <Typography variant="h6" color="text.secondary" sx={{ mb: 4 }}>
+      <Typography
+        variant="h6"
+        color="text.secondary"
+        sx={{ mb: 4 }}
+      >
         {pet.type}
       </Typography>
 
@@ -69,9 +121,38 @@ function PetDetailsPage() {
         {pet.description}
       </Typography>
 
-      <Button component={Link} to="/pets" variant="outlined">
-        Назад к объявлениям
-      </Button>
+      <Box
+        sx={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          gap: 2,
+        }}
+      >
+        <Button
+          component={Link}
+          to="/pets"
+          variant="outlined"
+        >
+          Назад к объявлениям
+        </Button>
+
+        <Button
+          variant="contained"
+          startIcon={<ShareIcon />}
+          onClick={handleShare}
+        >
+          Поделиться
+        </Button>
+
+        <Button
+          component={Link}
+          to={`/pets/${pet.id}/flyer`}
+          variant="outlined"
+          startIcon={<PrintIcon />}
+        >
+          Листовка
+        </Button>
+      </Box>
     </Container>
   )
 }
